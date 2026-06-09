@@ -191,53 +191,17 @@
 </div>
 
 <script>
-  /* ═══════════════════════════════════════════════════
-     ✏️  CATÁLOGO — EDITÁ ESTE OBJETO PARA PERSONALIZAR
-     ═══════════════════════════════════════════════════
-
-     Campos por ítem:
-       id        : número único (no repetir)
-       name      : nombre del producto o servicio
-       desc      : descripción breve
-       price     : precio en pesos (número, sin $)
-       category  : debe coincidir con una de las CATEGORIES
-       image     : (OPCIONAL) nombre del archivo de imagen
-                   Ej: image: "mascaracoco.jpg"
-                   El archivo tiene que estar en la misma
-                   carpeta que el index.html.
-                   Si no ponés imagen, se muestra un placeholder.
-
-     Para agregar: copiá un objeto, pegalo con coma, editá.
-     Para quitar: borrá el objeto entero (incluida la coma).
-
-     Para cambiar el número de WhatsApp, editá WHATSAPP_NUMBER
-     (formato: código de país + número, sin +  ni espacios).
+/* ═══════════════════════════════════════════════════
+     LÓGICA CONECTADA A DECAP CMS (catalog.json)
   ═══════════════════════════════════════════════════ */
 
-  const CATALOG = [
-    // ── Productos (agregá image: "archivo.jpg" para mostrar foto)
-    { id: 1,  name: "Máscara capilar coco",   desc: "Reparación express, hidratación profunda.",   price: 3500,  category: "Productos" },
-    { id: 2,  name: "Shampoo sin sulfatos",   desc: "Limpieza suave para cabello tratado.",        price: 2800,  category: "Productos" },
-    { id: 3,  name: "Aceite de argán",        desc: "Nutrición y brillo sin efecto graso.",        price: 4200,  category: "Productos" },
-    // ── Servicios
-    { id: 4,  name: "Corte femenino",         desc: "Adaptado a tu cara y estilo.",                price: 4800,  category: "Servicios" },
-    { id: 5,  name: "Corte infantil",         desc: "Para los más chiquitos, con paciencia.",      price: 2500,  category: "Servicios" },
-    // ── Color
-    { id: 6,  name: "Coloración completa",    desc: "Un color parejo y luminoso.",                 price: 9500,  category: "Color" },
-    { id: 7,  name: "Mechas",                 desc: "Iluminaciones personalizadas.",               price: 12000, category: "Color" },
-    { id: 8,  name: "Baño de color",          desc: "Revitaliza tu tono actual.",                  price: 6500,  category: "Color" },
-    // ── Tratamientos
-    { id: 9,  name: "Alisado brasileño",      desc: "Keratina de larga duración.",                 price: 18000, category: "Tratamientos" },
-    { id: 10, name: "Hidratación profunda",   desc: "Mascarilla reparadora de 30 min.",            price: 5500,  category: "Tratamientos" },
-    { id: 11, name: "Cauterización",          desc: "Recupera fibras dañadas.",                    price: 7000,  category: "Tratamientos" },
-  ];
+  let CATALOG = []; // Ahora arranca vacío y se llena con el JSON
+  const CATEGORIES = ["Todos", "Cortes", "Barba", "Color", "Tratamientos"];
 
-  const CATEGORIES = ["Todos", "Productos", "Servicios", "Color", "Tratamientos"];
-
-  const WHATSAPP_NUMBER = "5491123456789"; // ✏️ Reemplazá con tu número real
+  /* ── CONFIGURACIÓN ── */
+  const WHATSAPP_NUMBER = "5491123456789"; // ✏️ Reemplazá con tu número
   const CURRENCY_SYMBOL = "$";
 
-  /* ═══════════════ LÓGICA ═══════════════ */
   let cart = [];
   let activeFilter = "Todos";
 
@@ -245,8 +209,28 @@
     return CURRENCY_SYMBOL + n.toLocaleString('es-AR');
   }
 
+  /* ── CARGA DE DATOS DESDE EL CMS ── */
+  async function cargarCatalogo() {
+    try {
+      const response = await fetch('./catalog.json');
+      const data = await response.json();
+      
+      // Decap CMS guarda la lista dentro de la propiedad "services"
+      CATALOG = data.services || [];
+      
+      // Una vez que tenemos los datos, armamos la página
+      renderFilters();
+      renderCatalog();
+    } catch (error) {
+      console.error("Error al cargar el catálogo de servicios:", error);
+      document.getElementById('catalogGrid').innerHTML = '<p style="color: var(--muted);">No se pudieron cargar los servicios en este momento.</p>';
+    }
+  }
+
+  /* ── FILTERS ── */
   function renderFilters() {
-    document.getElementById('filters').innerHTML = CATEGORIES.map(cat => `
+    const el = document.getElementById('filters');
+    el.innerHTML = CATEGORIES.map(cat => `
       <button class="filter-btn ${cat === activeFilter ? 'active' : ''}" onclick="setFilter('${cat}')">${cat}</button>
     `).join('');
   }
@@ -257,38 +241,45 @@
     renderCatalog();
   }
 
+  /* ── CATALOG ── */
   function renderCatalog() {
+    const grid = document.getElementById('catalogGrid');
     const items = activeFilter === 'Todos' ? CATALOG : CATALOG.filter(s => s.category === activeFilter);
-    document.getElementById('catalogGrid').innerHTML = items.map(s => {
+    
+    grid.innerHTML = items.map(s => {
       const inCart = cart.some(c => c.id === s.id);
-      const imgBlock = s.image
-        ? `<img class="service-img" src="${s.image}" alt="${s.name}" loading="lazy">`
-        : `<div class="service-img-placeholder">
-             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-             Sin foto aún
-           </div>`;
+      
+      // Si el cliente subió una imagen desde el CMS, la mostramos
+      const imageHTML = s.image 
+        ? `<img src="${s.image}" alt="${s.name}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 2px; margin-bottom: 1rem; border: 0.5px solid var(--border);">` 
+        : '';
+
       return `
-        <article class="service-card">
-          ${imgBlock}
-          <div class="service-body">
-            <p class="service-cat">${s.category}</p>
-            <h3 class="service-name">${s.name}</h3>
-            <p class="service-desc">${s.desc}</p>
-            <div class="service-footer">
-              <span class="service-price">${formatPrice(s.price)}</span>
-              <button class="add-btn ${inCart ? 'added' : ''}" onclick="toggleCart(${s.id})">
-                ${inCart ? '✓ Agregado' : 'Agregar'}
-              </button>
-            </div>
+        <article class="service-card" data-id="${s.id}">
+          ${imageHTML}
+          <p class="service-cat">${s.category}</p>
+          <h3 class="service-name">${s.name}</h3>
+          <p class="service-desc">${s.desc}</p>
+          <div class="service-footer">
+            <span class="service-price">${formatPrice(s.price)}</span>
+            <button class="add-btn ${inCart ? 'added' : ''}" onclick="toggleCart(${s.id})">
+              ${inCart ? '✓ Agregado' : 'Agregar'}
+            </button>
           </div>
-        </article>`;
+        </article>
+      `;
     }).join('');
   }
 
+  /* ── CART LOGIC ── */
   function toggleCart(id) {
-    cart = cart.some(c => c.id === id)
-      ? cart.filter(c => c.id !== id)
-      : [...cart, { ...CATALOG.find(s => s.id === id) }];
+    const inCart = cart.some(c => c.id === id);
+    if (inCart) {
+      cart = cart.filter(c => c.id !== id);
+    } else {
+      const service = CATALOG.find(s => s.id === id);
+      if (service) cart.push({ ...service });
+    }
     updateCartUI();
     renderCatalog();
   }
@@ -300,49 +291,63 @@
   }
 
   function updateCartUI() {
-    document.getElementById('cartCount').textContent = cart.length;
-    const total = cart.reduce((s, i) => s + i.price, 0);
+    const count = cart.length;
+    document.getElementById('cartCount').textContent = count;
+    const total = cart.reduce((sum, s) => sum + s.price, 0);
     document.getElementById('cartTotal').textContent = formatPrice(total);
-    document.getElementById('waBtn').disabled = cart.length === 0;
-    document.getElementById('cartItems').innerHTML = cart.length === 0
-      ? '<div class="cart-empty"><div class="cart-empty-icon">🌸</div>Tu pedido está vacío.<br>Sumá servicios desde el catálogo.</div>'
-      : cart.map(s => `
-          <div class="cart-item">
-            <div>
-              <div class="cart-item-name">${s.name}</div>
-              <div class="cart-item-price">${formatPrice(s.price)}</div>
-            </div>
-            <button class="remove-item" onclick="removeFromCart(${s.id})" aria-label="Quitar ${s.name}">✕</button>
-          </div>`).join('');
+    const waBtn = document.getElementById('waBtn');
+    waBtn.disabled = count === 0;
+
+    const itemsEl = document.getElementById('cartItems');
+    if (count === 0) {
+      itemsEl.innerHTML = '<div class="cart-empty">Tu pedido está vacío.<br>Sumá servicios desde el catálogo.</div>';
+    } else {
+      itemsEl.innerHTML = cart.map(s => `
+        <div class="cart-item">
+          <div>
+            <div class="cart-item-name">${s.name}</div>
+            <div class="cart-item-price">${formatPrice(s.price)}</div>
+          </div>
+          <button class="remove-item" onclick="removeFromCart(${s.id})" aria-label="Quitar ${s.name}">✕</button>
+        </div>
+      `).join('');
+    }
   }
 
+  /* ── CART DRAWER ── */
   function openCart() {
-    const o = document.getElementById('cartOverlay');
-    o.style.display = 'flex';
-    requestAnimationFrame(() => o.classList.add('visible'));
+    const overlay = document.getElementById('cartOverlay');
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => overlay.classList.add('visible'));
     document.body.style.overflow = 'hidden';
   }
 
   function closeCart() {
-    const o = document.getElementById('cartOverlay');
-    o.classList.remove('visible');
-    setTimeout(() => { o.style.display = 'none'; document.body.style.overflow = ''; }, 350);
+    const overlay = document.getElementById('cartOverlay');
+    overlay.classList.remove('visible');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 350);
   }
 
   function handleOverlayClick(e) {
     if (e.target === document.getElementById('cartOverlay')) closeCart();
   }
 
+  /* ── WHATSAPP ── */
   function sendWhatsApp() {
-    if (!cart.length) return;
+    if (cart.length === 0) return;
     const lines = cart.map(s => `• ${s.name}: ${formatPrice(s.price)}`).join('\n');
-    const total = cart.reduce((s, i) => s + i.price, 0);
-    const msg = `¡Hola Karina/Vanesa! Quisiera reservar los siguientes servicios:\n\n${lines}\n\n*Total estimado: ${formatPrice(total)}*\n\n¿Cuándo tienen disponibilidad? ✿`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    const total = cart.reduce((sum, s) => sum + s.price, 0);
+    const msg = `¡Hola! Quisiera reservar los siguientes servicios:\n\n${lines}\n\n*Total estimado: ${formatPrice(total)}*\n\n¿Cuándo tienen disponibilidad?`;
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
   }
 
-  renderFilters();
-  renderCatalog();
+  /* ── INIT ── */
+  // Le decimos al navegador que cargue el catálogo apenas el HTML esté listo
+  document.addEventListener('DOMContentLoaded', cargarCatalogo);
 </script>
 </body>
 </html>

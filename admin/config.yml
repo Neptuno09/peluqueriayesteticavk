@@ -1,0 +1,40 @@
+# Configuración del Backend (Usando Git Gateway de Netlify)
+backend:
+  name: git-gateway
+  branch: main # Cambialo si tu rama principal se llama master
+
+# Carpeta donde se guardarán las imágenes que suba el cliente
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# Idioma del panel
+locale: 'es'
+
+# Configuración del contenido
+collections:
+  - name: "data"
+    label: "Configuración"
+    delete: false # No queremos que borren el archivo completo
+    editor:
+      preview: false # Desactiva la vista previa lateral para que sea más limpio
+    files:
+      - name: "catalog"
+        label: "Catálogo de Servicios"
+        file: "catalog.json"
+        fields:
+          - label: "Lista de Servicios"
+            name: "services"
+            widget: "list"
+            summary: '{{fields.name}} - {{fields.price}}'
+            fields:
+              - { label: "ID Único (Número)", name: "id", widget: "number", value_type: "int" }
+              - { label: "Nombre del Servicio", name: "name", widget: "string" }
+              - { label: "Descripción", name: "desc", widget: "text" }
+              - { label: "Precio ($)", name: "price", widget: "number", value_type: "int" }
+              - { 
+                  label: "Categoría", 
+                  name: "category", 
+                  widget: "select", 
+                  options: ["Cortes", "Color", "Peinados", "Tratamientos"] 
+                }
+              - { label: "Imagen del Servicio", name: "image", widget: "image", required: false }
