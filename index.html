@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VK — Peluquería & Estética</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VK <span>Peluquería & Estética</span></div>
+  <div class="nav-links">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <button class="cart-btn" onclick="openCart()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Mi pedido
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <!-- peonía izquierda -->
+  <svg class="hero-flower-left" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <ellipse cx="60" cy="60" rx="28" ry="20" fill="#E8449A" transform="rotate(0 60 60)"/>
+    <ellipse cx="60" cy="60" rx="28" ry="20" fill="#E8449A" transform="rotate(30 60 60)"/>
+    <ellipse cx="60" cy="60" rx="28" ry="20" fill="#F4A7C9" transform="rotate(60 60 60)"/>
+    <ellipse cx="60" cy="60" rx="28" ry="20" fill="#E8449A" transform="rotate(90 60 60)"/>
+    <ellipse cx="60" cy="60" rx="28" ry="20" fill="#F4A7C9" transform="rotate(120 60 60)"/>
+    <ellipse cx="60" cy="60" rx="28" ry="20" fill="#E8449A" transform="rotate(150 60 60)"/>
+    <circle cx="60" cy="60" r="14" fill="#FBDEED"/>
+    <circle cx="60" cy="60" r="8" fill="#F4A7C9"/>
+  </svg>
+  <!-- peonía derecha -->
+  <svg class="hero-flower" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <ellipse cx="80" cy="80" rx="36" ry="24" fill="#E8449A" transform="rotate(0 80 80)"/>
+    <ellipse cx="80" cy="80" rx="36" ry="24" fill="#F4A7C9" transform="rotate(36 80 80)"/>
+    <ellipse cx="80" cy="80" rx="36" ry="24" fill="#E8449A" transform="rotate(72 80 80)"/>
+    <ellipse cx="80" cy="80" rx="36" ry="24" fill="#F4A7C9" transform="rotate(108 80 80)"/>
+    <ellipse cx="80" cy="80" rx="36" ry="24" fill="#E8449A" transform="rotate(144 80 80)"/>
+    <circle cx="80" cy="80" r="18" fill="#FBDEED"/>
+    <circle cx="80" cy="80" r="10" fill="#F4A7C9"/>
+  </svg>
+
+  <p class="hero-eyebrow">Peluquería & Estética · Buenos Aires</p>
+  <h1 class="hero-vk">V<span class="italic">K</span></h1>
+  <p class="hero-tagline">Donde el cuidado se convierte en arte</p>
+  <a href="#servicios" class="hero-cta">
+    Ver servicios
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</header>
+
+<div class="petal-divider" aria-hidden="true">
+  <div class="petal-line"></div>
+  <span class="petal-icon">✿</span>
+  <div class="petal-line"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="nosotros">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="section-label">Sobre nosotras</p>
+      <h2 class="section-title">Dos hermanas, una pasión por el bienestar</h2>
+      <p>Somos Karina y Vanesa Torres. Juntas creamos VK, un espacio donde cada persona que entra se va sintiéndose mejor que cuando llegó.</p>
+      <p>Karina lleva años perfeccionando su arte detrás de la silla, con cortes, colores y tratamientos que realzan la belleza natural de cada una. Vanesa, por su parte, es especialista en estética y tratamientos de camilla, brindando un servicio integral en un ambiente cálido y profesional.</p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">17</div>
+          <div class="stat-label">Años de experiencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">+3k</div>
+          <div class="stat-label">Clientas felices</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="team-cards">
+        <div class="team-card">
+          <div class="team-avatar">K</div>
+          <div>
+            <div class="team-name">Karina Torres</div>
+            <div class="team-role">Peluquera profesional</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">V</div>
+          <div>
+            <div class="team-name">Vanesa Torres</div>
+            <div class="team-role">Especialista en estética</div>
+          </div>
+        </div>
+        <div class="stat-card" style="grid-column: span 2; text-align:center; margin-top:0.25rem;">
+          <div class="stat-num">5★</div>
+          <div class="stat-label">Calificación Google</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="petal-divider" aria-hidden="true">
+  <div class="petal-line"></div>
+  <span class="petal-icon">✿</span>
+  <div class="petal-line"></div>
+</div>
+
+<!-- CATALOG -->
+<section id="servicios">
+  <p class="section-label">Catálogo</p>
+  <h2 class="section-title">Nuestros servicios</h2>
+  <div class="catalog-filters" id="filters"></div>
+  <div class="catalog-grid" id="catalogGrid"></div>
+</section>
+
+<div class="petal-divider" aria-hidden="true">
+  <div class="petal-line"></div>
+  <span class="petal-icon">✿</span>
+  <div class="petal-line"></div>
+</div>
+
+<!-- CONTACT -->
+<section id="contacto">
+  <p class="section-label">Encontranos</p>
+  <h2 class="section-title">Vení a vernos</h2>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label">Dirección</div>
+      <div class="contact-value">Olivieri 1123, CABA</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">🕐</div>
+      <div class="contact-label">Horario</div>
+      <div class="contact-value">Lun–Sáb: 9:00 a 20:00</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📱</div>
+      <div class="contact-label">WhatsApp</div>
+      <div class="contact-value">+54 11 2618-2000</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📸</div>
+      <div class="contact-label">Instagram</div>
+      <div class="contact-value">@peluqueriayestetica.vk</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VK</div>
+  <div class="footer-hearts">✿ ✿ ✿</div>
+  <div>© 2025 VK Peluquería & Estética</div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Tu pedido ✿</h2>
+      <button class="close-btn" onclick="closeCart()" aria-label="Cerrar carrito">×</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🌸</div>
+        Tu pedido está vacío.<br>Sumá servicios desde el catálogo.
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <button class="whatsapp-btn" id="waBtn" onclick="sendWhatsApp()" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ═══════════════════════════════════════════════════
+     ✏️  CATÁLOGO — EDITÁ ESTE OBJETO PARA PERSONALIZAR
+     ═══════════════════════════════════════════════════
+
+     Campos por ítem:
+       id        : número único (no repetir)
+       name      : nombre del producto o servicio
+       desc      : descripción breve
+       price     : precio en pesos (número, sin $)
+       category  : debe coincidir con una de las CATEGORIES
+       image     : (OPCIONAL) nombre del archivo de imagen
+                   Ej: image: "mascaracoco.jpg"
+                   El archivo tiene que estar en la misma
+                   carpeta que el index.html.
+                   Si no ponés imagen, se muestra un placeholder.
+
+     Para agregar: copiá un objeto, pegalo con coma, editá.
+     Para quitar: borrá el objeto entero (incluida la coma).
+
+     Para cambiar el número de WhatsApp, editá WHATSAPP_NUMBER
+     (formato: código de país + número, sin +  ni espacios).
+  ═══════════════════════════════════════════════════ */
+
+  const CATALOG = [
+    // ── Productos (agregá image: "archivo.jpg" para mostrar foto)
+    { id: 1,  name: "Máscara capilar coco",   desc: "Reparación express, hidratación profunda.",   price: 3500,  category: "Productos" },
+    { id: 2,  name: "Shampoo sin sulfatos",   desc: "Limpieza suave para cabello tratado.",        price: 2800,  category: "Productos" },
+    { id: 3,  name: "Aceite de argán",        desc: "Nutrición y brillo sin efecto graso.",        price: 4200,  category: "Productos" },
+    // ── Servicios
+    { id: 4,  name: "Corte femenino",         desc: "Adaptado a tu cara y estilo.",                price: 4800,  category: "Servicios" },
+    { id: 5,  name: "Corte infantil",         desc: "Para los más chiquitos, con paciencia.",      price: 2500,  category: "Servicios" },
+    // ── Color
+    { id: 6,  name: "Coloración completa",    desc: "Un color parejo y luminoso.",                 price: 9500,  category: "Color" },
+    { id: 7,  name: "Mechas",                 desc: "Iluminaciones personalizadas.",               price: 12000, category: "Color" },
+    { id: 8,  name: "Baño de color",          desc: "Revitaliza tu tono actual.",                  price: 6500,  category: "Color" },
+    // ── Tratamientos
+    { id: 9,  name: "Alisado brasileño",      desc: "Keratina de larga duración.",                 price: 18000, category: "Tratamientos" },
+    { id: 10, name: "Hidratación profunda",   desc: "Mascarilla reparadora de 30 min.",            price: 5500,  category: "Tratamientos" },
+    { id: 11, name: "Cauterización",          desc: "Recupera fibras dañadas.",                    price: 7000,  category: "Tratamientos" },
+  ];
+
+  const CATEGORIES = ["Todos", "Productos", "Servicios", "Color", "Tratamientos"];
+
+  const WHATSAPP_NUMBER = "5491123456789"; // ✏️ Reemplazá con tu número real
+  const CURRENCY_SYMBOL = "$";
+
+  /* ═══════════════ LÓGICA ═══════════════ */
+  let cart = [];
+  let activeFilter = "Todos";
+
+  function formatPrice(n) {
+    return CURRENCY_SYMBOL + n.toLocaleString('es-AR');
+  }
+
+  function renderFilters() {
+    document.getElementById('filters').innerHTML = CATEGORIES.map(cat => `
+      <button class="filter-btn ${cat === activeFilter ? 'active' : ''}" onclick="setFilter('${cat}')">${cat}</button>
+    `).join('');
+  }
+
+  function setFilter(cat) {
+    activeFilter = cat;
+    renderFilters();
+    renderCatalog();
+  }
+
+  function renderCatalog() {
+    const items = activeFilter === 'Todos' ? CATALOG : CATALOG.filter(s => s.category === activeFilter);
+    document.getElementById('catalogGrid').innerHTML = items.map(s => {
+      const inCart = cart.some(c => c.id === s.id);
+      const imgBlock = s.image
+        ? `<img class="service-img" src="${s.image}" alt="${s.name}" loading="lazy">`
+        : `<div class="service-img-placeholder">
+             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+             Sin foto aún
+           </div>`;
+      return `
+        <article class="service-card">
+          ${imgBlock}
+          <div class="service-body">
+            <p class="service-cat">${s.category}</p>
+            <h3 class="service-name">${s.name}</h3>
+            <p class="service-desc">${s.desc}</p>
+            <div class="service-footer">
+              <span class="service-price">${formatPrice(s.price)}</span>
+              <button class="add-btn ${inCart ? 'added' : ''}" onclick="toggleCart(${s.id})">
+                ${inCart ? '✓ Agregado' : 'Agregar'}
+              </button>
+            </div>
+          </div>
+        </article>`;
+    }).join('');
+  }
+
+  function toggleCart(id) {
+    cart = cart.some(c => c.id === id)
+      ? cart.filter(c => c.id !== id)
+      : [...cart, { ...CATALOG.find(s => s.id === id) }];
+    updateCartUI();
+    renderCatalog();
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(c => c.id !== id);
+    updateCartUI();
+    renderCatalog();
+  }
+
+  function updateCartUI() {
+    document.getElementById('cartCount').textContent = cart.length;
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    document.getElementById('cartTotal').textContent = formatPrice(total);
+    document.getElementById('waBtn').disabled = cart.length === 0;
+    document.getElementById('cartItems').innerHTML = cart.length === 0
+      ? '<div class="cart-empty"><div class="cart-empty-icon">🌸</div>Tu pedido está vacío.<br>Sumá servicios desde el catálogo.</div>'
+      : cart.map(s => `
+          <div class="cart-item">
+            <div>
+              <div class="cart-item-name">${s.name}</div>
+              <div class="cart-item-price">${formatPrice(s.price)}</div>
+            </div>
+            <button class="remove-item" onclick="removeFromCart(${s.id})" aria-label="Quitar ${s.name}">✕</button>
+          </div>`).join('');
+  }
+
+  function openCart() {
+    const o = document.getElementById('cartOverlay');
+    o.style.display = 'flex';
+    requestAnimationFrame(() => o.classList.add('visible'));
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    const o = document.getElementById('cartOverlay');
+    o.classList.remove('visible');
+    setTimeout(() => { o.style.display = 'none'; document.body.style.overflow = ''; }, 350);
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('cartOverlay')) closeCart();
+  }
+
+  function sendWhatsApp() {
+    if (!cart.length) return;
+    const lines = cart.map(s => `• ${s.name}: ${formatPrice(s.price)}`).join('\n');
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const msg = `¡Hola Karina/Vanesa! Quisiera reservar los siguientes servicios:\n\n${lines}\n\n*Total estimado: ${formatPrice(total)}*\n\n¿Cuándo tienen disponibilidad? ✿`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  renderFilters();
+  renderCatalog();
+</script>
+</body>
+</html>
