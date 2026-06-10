@@ -1,3 +1,12 @@
 {
-  "services": []
+  "services": [
+    {
+      "id": 1,
+      "name": "papa",
+      "desc": "asdsa",
+      "price": 3500,
+      "category": "Cortes",
+      "image": "/assets/uploads/unasdj.png"
+    }
+  ]
 }
