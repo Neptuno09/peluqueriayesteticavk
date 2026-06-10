@@ -15,10 +15,10 @@ collections:
       preview: false
     files:
       - name: "catalog"
-        label: "Catálogo de Servicios"
+        label: "Catálogo de Productos"
         file: "catalog.json"
         fields:
-          - label: "Lista de Servicios"
+          - label: "producto"
             name: "services"
             widget: "list"
             summary: '{{fields.name}} - {{fields.price}}'
@@ -27,5 +27,4 @@ collections:
               - { label: "Nombre del Servicio", name: "name", widget: "string" }
               - { label: "Descripción", name: "desc", widget: "text" }
               - { label: "Precio ($)", name: "price", widget: "number", value_type: "int" }
-              - { label: "Categoría", name: "category", widget: "select", options: ["Cortes", "Barba", "Color", "Tratamientos"] }
               - { label: "Imagen del Servicio", name: "image", widget: "image", required: false }

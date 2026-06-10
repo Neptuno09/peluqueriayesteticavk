@@ -219,26 +219,11 @@
       CATALOG = data.services || [];
       
       // Una vez que tenemos los datos, armamos la página
-      renderFilters();
       renderCatalog();
     } catch (error) {
-      console.error("Error al cargar el catálogo de servicios:", error);
+      console.error("Error al cargar el catálogo de productos:", error);
       document.getElementById('catalogGrid').innerHTML = '<p style="color: var(--muted);">No se pudieron cargar los servicios en este momento.</p>';
     }
-  }
-
-  /* ── FILTERS ── */
-  function renderFilters() {
-    const el = document.getElementById('filters');
-    el.innerHTML = CATEGORIES.map(cat => `
-      <button class="filter-btn ${cat === activeFilter ? 'active' : ''}" onclick="setFilter('${cat}')">${cat}</button>
-    `).join('');
-  }
-
-  function setFilter(cat) {
-    activeFilter = cat;
-    renderFilters();
-    renderCatalog();
   }
 
   /* ── CATALOG ── */
@@ -340,7 +325,7 @@
     if (cart.length === 0) return;
     const lines = cart.map(s => `• ${s.name}: ${formatPrice(s.price)}`).join('\n');
     const total = cart.reduce((sum, s) => sum + s.price, 0);
-    const msg = `¡Hola! Quisiera reservar los siguientes servicios:\n\n${lines}\n\n*Total estimado: ${formatPrice(total)}*\n\n¿Cuándo tienen disponibilidad?`;
+    const msg = `¡Hola! Quisiera comprar los siguientes productos:\n\n${lines}\n\n*Total estimado: ${formatPrice(total)}*\n\n¿Cuándo tienen disponibilidad?`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   }
