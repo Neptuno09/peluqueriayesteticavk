@@ -147,6 +147,18 @@ position: relative;
 }
 .hero-cta:hover { background: #d0357f; transform: translateY(-2px); }
 
+.hero-cta-whatsapp {
+display: inline-flex; align-items: center; gap: 0.7rem;
+font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+color: #fff;
+background: #25D366;
+padding: 0.9rem 2.5rem;
+border-radius: 30px;
+transition: background 0.2s, transform 0.15s;
+position: relative;
+margin-top: 0.5rem;
+}
+.hero-cta-whatsapp:hover { background: #1fb358; transform: translateY(-2px); }
 /* ── PETAL DIVIDER ── */
 .petal-divider {
 display: flex; align-items: center; gap: 1rem;
@@ -430,7 +442,7 @@ footer { flex-direction: column; gap: 0.75rem; text-align: center; }
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem; 
       margin-bottom: 0.6rem;
-      color: var(--white);
+      color: var(--text);
     }
     .service-desc { 
       font-size: 0.85rem; 
@@ -473,3 +485,66 @@ footer { flex-direction: column; gap: 0.75rem; text-align: center; }
       background: var(--gold);
       font-weight: 500;
     }
+
+    /* ─────────────── BOTÓN HERO Y MODAL DE TURNOS ─────────────── */
+.btn-turno {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--pink);
+  color: var(--white);
+  padding: 0.85rem 2.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-top: 1rem;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(232, 68, 154, 0.3);
+}
+.btn-turno:hover { opacity: 0.9; transform: translateY(-2px); color: white; }
+
+.turno-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(26, 8, 16, 0.6); /* Un fondo oscuro con tono a tu web */
+  backdrop-filter: blur(3px);
+  display: none; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.turno-overlay.visible { opacity: 1; }
+
+.turno-modal {
+  background: var(--white);
+  width: 90%; max-width: 400px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.turno-overlay.visible .turno-modal { transform: translateY(0); }
+
+.turno-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--pink-pale);
+}
+.turno-header h3 { 
+  font-family: 'Playfair Display', serif; 
+  font-size: 1.2rem; color: var(--text); font-weight: 500; 
+}
+.turno-body { padding: 1.5rem; }
+.turno-body p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+
+.turno-select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+  cursor: pointer;
+}
+.turno-select:focus { border-color: var(--pink); box-shadow: 0 0 0 2px var(--pink-soft); }
