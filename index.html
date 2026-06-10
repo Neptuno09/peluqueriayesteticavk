@@ -233,22 +233,24 @@
     grid.innerHTML = items.map(s => {
       const inCart = cart.some(c => c.id === s.id);
       
-      // Si el cliente subió una imagen desde el CMS, la mostramos
+      // La imagen ahora ocupa el 100% superior sin dejar espacios raros
       const imageHTML = s.image 
-        ? `<img src="${s.image}" alt="${s.name}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 2px; margin-bottom: 1rem; border: 0.5px solid var(--border);">` 
+        ? `<img src="${s.image}" alt="${s.name}" style="width: 100%; height: 200px; object-fit: cover;">` 
         : '';
 
       return `
         <article class="service-card" data-id="${s.id}">
           ${imageHTML}
-          <p class="service-cat">${s.category}</p>
-          <h3 class="service-name">${s.name}</h3>
-          <p class="service-desc">${s.desc}</p>
-          <div class="service-footer">
-            <span class="service-price">${formatPrice(s.price)}</span>
-            <button class="add-btn ${inCart ? 'added' : ''}" onclick="toggleCart(${s.id})">
-              ${inCart ? '✓ Agregado' : 'Agregar'}
-            </button>
+          <div class="service-content">
+            <p class="service-cat">${s.category}</p>
+            <h3 class="service-name">${s.name}</h3>
+            <p class="service-desc">${s.desc}</p>
+            <div class="service-footer">
+              <span class="service-price">${formatPrice(s.price)}</span>
+              <button class="add-btn ${inCart ? 'added' : ''}" onclick="toggleCart(${s.id})">
+                ${inCart ? '✓ Agregado' : 'Agregar'}
+              </button>
+            </div>
           </div>
         </article>
       `;

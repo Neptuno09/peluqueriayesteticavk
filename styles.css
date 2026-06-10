@@ -390,3 +390,86 @@ section { padding: 3rem 1.25rem; }
 .hero-flower, .hero-flower-left { display: none; }
 footer { flex-direction: column; gap: 0.75rem; text-align: center; }
 }
+
+/* ─────────────── NUEVO DISEÑO DE TARJETAS (ESTÉTICO) ─────────────── */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem; /* Más espacio entre tarjetas */
+    }
+    .service-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden; /* Esto hace que la imagen respete las esquinas redondeadas */
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover { 
+      border-color: var(--gold-dim); 
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Contenedor interno para dar un padding perfecto al texto */
+    .service-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; /* Empuja el footer hacia abajo para que queden alineados */
+    }
+    .service-cat {
+      font-size: 0.65rem; 
+      letter-spacing: 0.2em; 
+      text-transform: uppercase;
+      color: var(--gold); 
+      margin-bottom: 0.5rem;
+    }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; 
+      margin-bottom: 0.6rem;
+      color: var(--white);
+    }
+    .service-desc { 
+      font-size: 0.85rem; 
+      color: var(--muted); 
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .service-footer { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      margin-top: auto; /* Alinea el footer abajo sin importar el largo del texto */
+      padding-top: 1rem;
+      border-top: 0.5px solid rgba(46, 46, 46, 0.5); /* Sutil línea divisoria interna */
+    }
+    .service-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; 
+      color: var(--gold);
+      font-weight: 400;
+    }
+    .add-btn {
+      font-size: 0.7rem; 
+      letter-spacing: 0.12em; 
+      text-transform: uppercase;
+      color: var(--offwhite);
+      border: 0.5px solid var(--border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+    .add-btn:hover { 
+      border-color: var(--gold); 
+      color: var(--gold); 
+      background: rgba(201, 168, 76, 0.05);
+    }
+    .add-btn.added { 
+      border-color: var(--gold); 
+      color: var(--black); 
+      background: var(--gold);
+      font-weight: 500;
+    }
